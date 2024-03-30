@@ -1,0 +1,48 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+//não especifiquei o tamanho maximo dos campos pois
+//como estou usando o sqlite como banco de dados (para facilitara e execução do projeto)
+//ele não permite por conta da limitação
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  username  String   @unique
+  root      Boolean  @default(false)
+  firstName String?
+  lastName  String?
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Task      Task[]
+
+  @@map("users")
+  @@index([id, createdAt, updatedAt, email, username])
+  //adicionei os indices das tabelas para melhor perfomance
+}
+
+model Task {
+  id        Int      @id @default(autoincrement())
+  favorite  Boolean?  @default(false)
+  color     String?
+  content   String?
+  title     String
+  User      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tasks")
+  @@index([createdAt, userId, favorite])
+}

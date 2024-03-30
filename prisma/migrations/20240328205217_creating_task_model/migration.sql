@@ -1,0 +1,10 @@
+-- CreateTable
+CREATE TABLE "tasks" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "favorite" BOOLEAN NOT NULL DEFAULT false,
+    "color" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "tasks_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
