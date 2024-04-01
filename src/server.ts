@@ -1,6 +1,8 @@
 
 import express, { Request, Response } from 'express';
 import routes from './routes';
+import cors from 'cors';
+
 
 const server = express();
 
@@ -13,7 +15,7 @@ server.use(express.urlencoded({ extended: true }));
 //com isso eu consigo orquestrar melhor onde cada rota fica e como gerenciar
 //devo adminitir que boa parte da orgnização das pastas se deve ao meu pequeno conhecimento de 
 //organização ee arquitetura do NestJS
-
+server.use(cors())
 server.use(routes)
 
 server.get('/', (request: Request, response: Response): Response => {
