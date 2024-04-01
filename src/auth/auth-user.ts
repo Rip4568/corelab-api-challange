@@ -19,15 +19,15 @@ authRouter.post("/login", async (request: Request, response: Response) => {
       }
     });
     if (!user) {
-      return response.json({
+      return response.status(500).json({
         message: "credenciais inválidas, email ou username inválido"
-      }).status(500)
+      })
     }
     const passwordMatch = await compareHash(password, user.password)
     if (!passwordMatch) {
-      return response.json({
+      return response.status(500).json({
         "message": "credenciais inválidas, senhas incompativeis"
-      }).status(500)
+      })
     }
 
     const token = generateTokenJWT(user);
