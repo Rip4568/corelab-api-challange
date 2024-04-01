@@ -71,7 +71,7 @@ export async function updateTaskService(request: Request | any, response: Respon
         ...taskData,
       }
     })
-    return response.json({ message: "Rota para atualizar uma task", taskId, task }).status(200);
+    return response.json({ message: "Task Updated", taskId, task }).status(200);
   } catch (error) {
     return response.json({ error }).status(500);
   }
@@ -81,7 +81,14 @@ export async function deleteTaskService(request: Request| any, response: Respons
   try {
     const taskId = request.params.id;
     const user = request.user.payload;
-    return response.json({ message: "Rota para deletar uma task", taskId, user }).status(200);
+    const taskDeleted = await prisma.task.delete({
+      where: {
+        id: taskId,
+        userId: user.id
+      }
+    })
+
+    return response.json({ message: "Task Deleted", taskId, user, taskDeleted }).status(200);
   } catch (error) {
     return response.json({ error }).status(500);
   }
