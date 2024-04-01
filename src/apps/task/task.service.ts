@@ -16,7 +16,7 @@ export async function getAllTaskService(request: Request | any, response: Respon
 
     return response.status(200).json({ tasks });
   } catch (error) {
-    return response.json({ error }).status(500);
+    return response.status(500).json({ error });
   }
 }
 
@@ -30,9 +30,9 @@ export async function getOneTaskService(request: Request | any, response: Respon
         userId: user.id
       }
     });
-    return response.json({ message: "Get one Task", task }).status(200);
+    return response.status(200).json({ message: "Get one Task", task });
   } catch (error) {
-    return response.json({ error }).status(500);
+    return response.status(500).json({ error });
   }
 }
 
@@ -53,7 +53,7 @@ export async function createTaskService(request: Request | any, response: Respon
       task
     });
   } catch (error) {
-    return response.json({ error }).status(500);
+    return response.status(500).json({ error });
   }
 }
 
@@ -71,9 +71,9 @@ export async function updateTaskService(request: Request | any, response: Respon
         ...taskData,
       }
     })
-    return response.json({ message: "Task Updated", taskId, task }).status(200);
+    return response.status(200).json({ message: "Task Updated", taskId, task });
   } catch (error) {
-    return response.json({ error }).status(500);
+    return response.status(500).json({ error });
   }
 }
 
@@ -88,8 +88,8 @@ export async function deleteTaskService(request: Request| any, response: Respons
       }
     })
 
-    return response.json({ message: "Task Deleted", taskId, user, taskDeleted }).status(200);
+    return response.status(200).json({ message: "Task Deleted", taskId, user, taskDeleted });
   } catch (error) {
-    return response.json({ error }).status(500);
+    return response.status(500).json({ error });
   }
 }
