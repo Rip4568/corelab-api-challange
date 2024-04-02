@@ -59,7 +59,7 @@ export async function createTaskService(request: Request | any, response: Respon
 
 export async function updateTaskService(request: Request | any, response: Response) {
   try {
-    const taskId = request.params.id;
+    const taskId = Number(request.params.id);
     const taskData = request.body;
     const user = request.user;
     const task = await prisma.task.update({
