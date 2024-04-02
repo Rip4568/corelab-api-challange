@@ -79,16 +79,15 @@ export async function updateTaskService(request: Request | any, response: Respon
 
 export async function deleteTaskService(request: Request| any, response: Response) {
   try {
-    const taskId = request.params.id;
-    const user = request.user.payload;
+    const taskId = Number(request.params.id);
+    //const user = request.user.payload;
     const taskDeleted = await prisma.task.delete({
       where: {
-        id: taskId,
-        userId: user.id
+        id: taskId
       }
     })
 
-    return response.status(200).json({ message: "Task Deleted", taskId, user, taskDeleted });
+    return response.status(200).json({ message: "Task Deleted", taskId, taskDeleted });
   } catch (error) {
     return response.status(500).json({ error });
   }
