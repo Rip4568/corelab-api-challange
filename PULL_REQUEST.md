@@ -13,3 +13,6 @@ para um bom desenvolvimento.
 
 minha organizaão do github ficou bem ruim pois não sei se vale a pena o tempo
 gasto para organizaar os commits e seguir as boas praticas do coventional commits
+
+
+para rodar basta dar um ```npm run dev``` ou ```docker compose up --build```
